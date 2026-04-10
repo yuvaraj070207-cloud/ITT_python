@@ -1,0 +1,209 @@
+Script started on Fri Feb 27 11:44:00 2026
+[24bcs188@mepcolinux ex_2]$cat closestPair.java
+import java.util.Scanner;
+public class closestPair 
+{
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int x1=0,x2=0,y1=0,y2=0;
+        int n;
+        double dist, minDist;
+
+        System.out.println("Enter the Number of Points:");
+        n = sc.nextInt();
+
+        int[] x = new int[n];
+        int[] y = new int[n];
+
+        // Input coordinates
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the X-Coordinate of point " + (i + 1) + ":");
+            x[i] = sc.nextInt();
+
+            System.out.println("Enter the Y-Coordinate of point " + (i + 1) + ":");
+            y[i] = sc.nextInt();
+        }
+
+        // Display points
+        for (int i = 0; i < n; i++) {
+            System.out.println("Point " + (i + 1) + ": (" + x[i] + ", " + y[i] + ")");
+        }
+
+        // Initialize minimum distance
+        minDist = Double.MAX_VALUE;
+
+        // Calculate distances between all pairs
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+
+                dist = Math.sqrt(
+                        (x[i] - x[j]) * (x[i] - x[j]) +
+                        (y[i] - y[j]) * (y[i] - y[j])
+                );
+
+                System.out.println(
+                        "Distance between Point " + (i + 1) +
+                        " and Point " + (j + 1) +
+                        " = " + dist
+                );
+
+                if (dist < minDist)
+		{
+                     minDist = dist;
+		     x1=x[i];
+		     y1=y[i];
+		     x2=x[j];
+		     y2=y[j];
+                }
+            }
+        }
+
+	System.out.println("Between the points:"+'('+x1+','+y1+')'+"and"+'('+x2+','+y2+')');
+        System.out.println("Minimum Euclidean Distance:"+minDist);
+
+
+	
+
+        sc.close();
+    }
+}
+[24bcs188@mepcolinux ex_2]$javac closestPair.java
+[24bcs188@mepcolinux ex_2]$java closestPair
+Enter the Number of Points:
+3
+Enter the X-Coordinate of point 1:
+0
+Enter the Y-Coordinate of point 1:
+0
+Enter the X-Coordinate of point 2:
+3
+Enter the Y-Coordinate of point 2:
+4
+Enter the X-Coordinate of point 3:
+6
+Enter the Y-Coordinate of point 3:
+8
+Point 1: (0, 0)
+Point 2: (3, 4)
+Point 3: (6, 8)
+Distance between Point 1 and Point 2 = 5.0
+Distance between Point 1 and Point 3 = 10.0
+Distance between Point 2 and Point 3 = 5.0
+Between the points:(0,0)and(3,4)
+Minimum Euclidean Distance:5.0
+[24bcs188@mepcolinux ex_2]$java closestPair
+Enter the Number of Points:
+4
+Enter the X-Coordinate of point 1:
+-1
+Enter the Y-Coordinate of point 1:
+-2
+Enter the X-Coordinate of point 2:
+2
+Enter the Y-Coordinate of point 2:
+2
+Enter the X-Coordinate of point 3:
+4
+Enter the Y-Coordinate of point 3:
+6
+Enter the X-Coordinate of point 4:
+-2
+Enter the Y-Coordinate of point 4:
+-1
+Point 1: (-1, -2)
+Point 2: (2, 2)
+Point 3: (4, 6)
+Point 4: (-2, -1)
+Distance between Point 1 and Point 2 = 5.0
+Distance between Point 1 and Point 3 = 9.433981132056603
+Distance between Point 1 and Point 4 = 1.4142135623730951
+Distance between Point 2 and Point 3 = 4.47213595499958
+Distance between Point 2 and Point 4 = 5.0
+Distance between Point 3 and Point 4 = 9.219544457292887
+Between the points:(-1,-2)and(-2,-1)
+Minimum Euclidean Distance:1.4142135623730951
+[24bcs188@mepcolinux ex_2]$ls
+\  closestPair.class  closestPair.java	ex_2.prn  patternMatch	patternMatch.class  patternMatch.java
+[24bcs188@mepcolinux ex_2]$cat patternMatch.java
+import java.util.Scanner;
+
+public class patternMatch {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String text, pattern;
+        boolean found = false;
+
+        System.out.println("Enter the Text:");
+        text = sc.nextLine();
+	
+	
+
+        System.out.println("Enter the Pattern:");
+        pattern = sc.nextLine();
+
+        char[] ch=text.toCharArray();
+	int n=0;
+	for(char c:ch)
+	{
+	   n++;
+	}
+	char[] ch1=pattern.toCharArray();
+	int m=0;
+	for(char c:ch1)
+	{
+	   m++;
+	}
+
+
+
+        for (int i = 0; i <= n - m; i++) {
+            int j = 0;
+
+            while (j < m && pattern.charAt(j) == text.charAt(i + j))    //compare the character of index j and i+j
+	    {
+                j++;
+            }
+
+            if (j == m)
+	    {
+                System.out.println("Pattern found at index: " + i);
+                found = true;
+                break;  
+            }
+        }
+
+        if (!found) {
+            System.out.println("Pattern not found");
+        }
+
+        sc.close();
+    }
+}
+[24bcs188@mepcolinux ex_2]$javac patternMatch.java
+[24bcs188@mepcolinux ex_2]$java patternMatch
+Enter the Text:
+YUVARAJ_T
+Enter the Pattern:
+_T
+Pattern found at index: 7
+[24bcs188@mepcolinux ex_2]$java patternMatch
+Enter the Text:
+JACK_X_ROSE
+Enter the Pattern:
+_X_
+Pattern found at index: 4
+[24bcs188@mepcolinux ex_2]$java patternMatch
+Enter the Text:
+PEAKY_BLINDERS
+Enter the Pattern:
+WINTER
+Pattern not found
+[24bcs188@mepcolinux ex_2]$exit
+exit
+
+Script done on Fri Feb 27 11:46:59 2026

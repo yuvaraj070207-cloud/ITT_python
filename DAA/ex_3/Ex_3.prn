@@ -1,0 +1,168 @@
+Script started on Fri Feb 27 11:53:05 2026
+[24bcs188@mepcolinux ex_3]$cat mergeSort.java
+import java.util.*;
+class mergeSort 
+{
+    static void mergeSort(int[] arr, int low, int high) 
+    {
+        if (low < high) 
+        {
+            int mid = (low + high) / 2;
+
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid + 1, high);
+
+            merge(arr, low, mid, high);
+        }
+    }
+    static void merge(int[] arr, int low, int mid, int high) 
+    {
+        int n1 = mid - low + 1;
+        int n2 = high - mid;
+        int[] left = new int[n1];
+        int[] right = new int[n2];
+        for (int i = 0; i < n1; i++)
+            left[i] = arr[low + i];
+        for (int j = 0; j < n2; j++)
+            right[j] = arr[mid + 1 + j];
+        int i = 0, j = 0, k = low;
+        while (i < n1 && j < n2) 
+        {
+            if (left[i] <= right[j])
+                arr[k++] = left[i++];
+            else
+                arr[k++] = right[j++];
+        }
+        while (i < n1)
+            arr[k++] = left[i++];
+        while (j < n2)
+            arr[k++] = right[j++];
+    }
+    public static void main(String[] args) 
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter the number of elements: ");
+        int n = in.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = in.nextInt();
+        mergeSort(arr, 0, n - 1);
+        System.out.println("Sorted Array:");
+        for (int i = 0; i < n; i++)
+            System.out.print(arr[i] + " ");
+        in.close();
+    }
+}
+[24bcs188@mepcolinux ex_3]$javac mergeSort.java
+[24bcs188@mepcolinux ex_3]$java mergeSort
+Enter the number of elements: 7
+Enter 7 elements:
+23
+45
+67
+12
+10
+90
+0
+Sorted Array:
+0 10 12 23 45 67 90 [24bcs188@mepcolinux ex_3]$java mergeSort.
+Enter the number of elements: 5
+Enter 5 elements:
+5
+4
+3
+2
+1
+Sorted Array:
+1 2 3 4 5 [24bcs188@mepcolinux ex_3]$java mergeSort
+Enter the number of elements: 4
+Enter 4 elements:
+999
+567
+910
+1000
+Sorted Array:
+567 910 999 1000 [24bcs188@mepcolinux ex_3]$cat quickSort.java
+import java.util.Scanner;
+
+public class quickSort {
+
+    static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int p = partition(arr, low, high);
+
+            quickSort(arr, low, p - 1);
+            quickSort(arr, p + 1, high);
+        }
+    }
+
+    static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        System.out.println("Enter the elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = sc.nextInt();
+
+        quickSort(arr, 0, n - 1);
+
+        System.out.println("Sorted Array:");
+        for (int x : arr)
+            System.out.print(x + " ");
+    }
+}
+[24bcs188@mepcolinux ex_3]$javac quickSort.java
+[24bcs188@mepcolinux ex_3]$java quickSort
+Enter number of elements: 7
+Enter the elements:
+2
+5
+8
+3
+90
+123
+4678
+Sorted Array:
+2 3 5 8 90 123 4678 [24bcs188@mepcolinux ex_3]$java quickSort
+Enter number of elements: 10
+Enter the elements:
+678
+345
+123
+789
+12
+0
+10
+156
+1000
+999
+Sorted Array:
+0 10 12 123 156 345 678 789 999 1000 [24bcs188@mepcolinux ex_3]$exit
+exit
+
+Script done on Fri Feb 27 11:55:53 2026
